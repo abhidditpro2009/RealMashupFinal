@@ -78,8 +78,8 @@
 				  	<td> ${flash.city}</td>
 				  	<td> ${flash.zip }</td>
 				  	<td> ${flash.bathroom} </td>
-					<td> ${ flash.bedroom} </td>
-					<td> ${ flash.fArea} </td>
+					<td> ${flash.bedroom} </td>
+					<td> ${flash.fArea} </td>
 					<td> ${flash.lArea} </td>
 				  	<td> ${flash.zestAmt}</td>
 				</tr>

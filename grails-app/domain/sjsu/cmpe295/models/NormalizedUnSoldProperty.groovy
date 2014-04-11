@@ -31,7 +31,7 @@ class NormalizedUnSoldProperty {
 	Double zest_valueChange
 	Double zest_low
 	Double zest_high
-	
+	Boolean priceAppreciated // just to test
 	
     static mapping = {
     }

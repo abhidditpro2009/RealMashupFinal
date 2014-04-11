@@ -90,10 +90,10 @@ class DataNormalizerService extends DateGroovyMethods {
 			// if ZPID exists then we are just updating the record
 			// else we are adding a new record
 
-			if(NormalizedSoldProperty.findByZpID(zpid).id != 0)
-				property = NormalizedSoldProperty.findByZpID(zpid) //update
+			if(NormalizedUnSoldProperty.findByZpID(zpid) != null)
+				property = NormalizedUnSoldProperty.findByZpID(zpid) //update
 			else
-				property = new NormalizedSoldProperty() // insert
+				property = new NormalizedUnSoldProperty() // insert
 				 
 			// Set external factors
 			// These factors are manually entered from areavibes.com
@@ -113,7 +113,7 @@ class DataNormalizerService extends DateGroovyMethods {
 				property.setAge(0);
 			}
 			
-			if(lastSoldDate != 0 || lastSoldDate != "0")
+			if(lastSoldDate != 0 && !lastSoldDate.equals("0"))
 			{
 				def today = new Date()
 				def sdf = new SimpleDateFormat("MM/dd/yyyy")
@@ -133,7 +133,12 @@ class DataNormalizerService extends DateGroovyMethods {
 			
 			
 			// Algorithm to calculate price Appreciation factor
-			if(lastSoldPrice > zestAmt )
+			// zestVal tells us how much price has changed from last updation
+			// We cannot rely on lastSoldPrice because the house may be sold
+			// 50 years back as per the rate in that time
+			
+			
+			if(zestVal > 0 )
 				property.setPriceAppreciated(true)
 			else
 				property.setPriceAppreciated(false)
@@ -163,7 +168,7 @@ class DataNormalizerService extends DateGroovyMethods {
 		return result
 	}
 	
-	def populateExternalFactors(NormalizedSoldProperty property,String city)
+	def populateExternalFactors(NormalizedUnSoldProperty property,String city)
 	{	
 		
 		switch(city.toLowerCase())
@@ -502,7 +507,7 @@ class DataNormalizerService extends DateGroovyMethods {
 		return property;
 	}
 	
-	def populateInternalFactors(NormalizedSoldProperty property,Double  bathroom,Double  bedroom,Double fArea,Double lArea,Double lastSoldPrice, Double tax,String useCode,Double zestAmt,Double zestHigh,Double zestLow,Double zestVal, Double zpid)
+	def populateInternalFactors(NormalizedUnSoldProperty property,Double  bathroom,Double  bedroom,Double fArea,Double lArea,Double lastSoldPrice, Double tax,String useCode,Double zestAmt,Double zestHigh,Double zestLow,Double zestVal, Double zpid)
 	{	
 		//scale bedrooms and bathroom
 		property = scaleBathRooms(property, bathroom)
@@ -527,7 +532,7 @@ class DataNormalizerService extends DateGroovyMethods {
 		return property;
 	}
 	
-	def scaleUseCode(NormalizedSoldProperty property, String useCode)
+	def scaleUseCode(NormalizedUnSoldProperty property, String useCode)
 	{
 		switch(useCode)
 		{
@@ -564,7 +569,7 @@ class DataNormalizerService extends DateGroovyMethods {
 		return property
 	}
 	
-	def scaleRooms(NormalizedSoldProperty property, Double bedroom)
+	def scaleRooms(NormalizedUnSoldProperty property, Double bedroom)
 	{
 		switch (bedroom)
 		{
@@ -595,7 +600,7 @@ class DataNormalizerService extends DateGroovyMethods {
 		return property
 	}
 	
-	def scaleBathRooms(NormalizedSoldProperty property, Double bathroom)
+	def scaleBathRooms(NormalizedUnSoldProperty property, Double bathroom)
 	{
 		switch (bathroom)
 		{
@@ -623,7 +628,7 @@ class DataNormalizerService extends DateGroovyMethods {
 		return property
 	}
 	
-	def scaleFArea(NormalizedSoldProperty property, Double Farea)
+	def scaleFArea(NormalizedUnSoldProperty property, Double Farea)
 	{
 		switch (Farea)
 		{
@@ -660,7 +665,7 @@ class DataNormalizerService extends DateGroovyMethods {
 		return property
 	}
 	
-	def scaleLArea(NormalizedSoldProperty property, Double Larea)
+	def scaleLArea(NormalizedUnSoldProperty property, Double Larea)
 	{
 		switch (Larea)
 		{

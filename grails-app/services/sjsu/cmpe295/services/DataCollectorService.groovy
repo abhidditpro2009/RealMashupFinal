@@ -32,7 +32,7 @@ class DataCollectorService {
 		def noOfRecordsScanned = 0
 		def noOfRowsInserted = 0
 		def csvIterator
-		def csvFileObject = new File( "E:\\CMPE295B\\results\\soldResult.csv" ).withReader {
+		def csvFileObject = new File( "E:\\CMPE295B\\results\\unSoldResult.csv" ).withReader {
 			csvIterator = CsvParser.parseCsv( it )
 			csvIterator.each {
 				String res = dataNormalizerService.normalizeData(it[3].toString().toDouble(),
