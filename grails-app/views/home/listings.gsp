@@ -377,7 +377,7 @@ col-lg-4 col-md-4 col-sm-4{
 						<h3>Price Trend</h3>
 					</div>
 					<g:if test="${flash.priceAppreciated}">
-						<g:img dir="images"  file="prices-up.jpg" alt=""/>
+						<g:img dir="images"  file="prices-Up.jpg" alt=""/>
 						<span class="label label-warning">Prices are Up</span>
 					</g:if>
 					<g:else> 
