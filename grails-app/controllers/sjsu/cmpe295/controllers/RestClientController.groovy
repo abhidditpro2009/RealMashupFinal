@@ -5,6 +5,7 @@ import sjsu.cmpe295.models.User
 import grails.converters.XML
 import grails.converters.JSON
 import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.RESTClient
 import grails.plugins.rest.client.*
@@ -31,7 +32,6 @@ class RestClientController
 			
 			//def data = new URL("http://realmashup.aws.af.cm/rest/getProperties?query="+params.query.replace(" ","+")+"&paginate=false").getText()
 			println(data)
-			
 			def json = new JsonSlurper().parseText(data)
 			println(json)
 			
@@ -110,6 +110,8 @@ class RestClientController
 							it.zest_amt = zestAmount
 						}
 						
+						flash.query = params.query
+						flash.propertiesStr = JsonOutput.toJson(json.properties)
 						flash.properties = properties
 						
 						//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
@@ -148,6 +150,7 @@ class RestClientController
 			def properties = json.properties
 			println(properties.toString())
 			flash.properties = properties 
+			println(properties);
 			render ( properties )
 		}catch(Exception e)
 		{
@@ -178,6 +181,7 @@ class RestClientController
 				println(zestAmount)
 				it.zest_amt = zestAmount
 			}
+			
 			
 			flash.properties = properties
 			render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
@@ -237,7 +241,7 @@ class RestClientController
 			{
 				body = [email:params.email, password:params.password];
 				response.success = { resp, json ->
-									println(json)
+									//println(json)
 									user = json.user
 									error =json.error
 								}

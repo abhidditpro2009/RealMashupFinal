@@ -21,6 +21,20 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 }
 </style>
 <style type="text/css">
+#map-canvas {
+   height: 410px;
+   width: 600px;
+   padding: 50px;
+   overflow: visible;
+   float: right;
+   border-style: ridge;
+   border-width:5px;
+   border-color: white;
+   padding-left: 50px; 
+ }
+/**margin:50px 25px 15px 500px;**/
+#map-canvas img { max-width: none }
+
 @media print {
 	.gm-style .gmnoprint,.gmnoprint {
 		display: none
@@ -226,6 +240,7 @@ col-lg-4 col-md-4 col-sm-4{
 <script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<g:javascript src="mapUtil.js"></g:javascript>
 <!-- fancybox init -->
 <script>
 	$(document).ready(function(e) {
@@ -484,6 +499,19 @@ col-lg-4 col-md-4 col-sm-4{
 			<p class="text-muted credit align-center" style = "color: #777777; font-size: 16px; font-weight: 300; line-height: 1.6em;">&copy; Real Realty 2014</p>
 		</div>
 	</div>
+	
+	
+		<div id="map-canvas" align="right">
+			    <script>
+			        //set icons to use local
+			        var blue_marker = '<g:resource dir="images" file="marker_blue.png" absolute="true" />';
+			        
+        			plotLocationByAddress("${flash.query}");
+        			var propertiesStr = ${flash.propertiesStr};
+       				plotProperties(propertiesStr, blue_marker); // this will plot the properties
+   				</script>
+		</div>
+
 	
 </body>
 </html>
