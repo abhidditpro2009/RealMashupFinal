@@ -542,6 +542,7 @@ $(document).ready(
 					})
 		});
 </script>
+
 <script>
 $(document).ready(function(e) {
 	var lis = $('.nav > li');
@@ -557,7 +558,6 @@ $(document).ready(function(e) {
 	});
 
 });
-</>
-
-ipt<body>
+</script>
+</body>
 </html>
