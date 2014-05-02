@@ -1,52 +1,68 @@
-
 var geocoder;
 var map;
-var initialized =false;
+var bounds;
+var initialized = false;
 
-//https://developers.google.com/maps/tutorials/customizing/custom-markers
-//http://kml4earth.appspot.com/icons.html
-
-//var iconBase = "http://maps.google.com/mapfiles/kml/pushpin/";
-//var blue_marker = iconBase + "blue-pushpin.png";
-
-function initialize() {  //DONE
+function initialize() { // DONE
 	geocoder = new google.maps.Geocoder();
-	
+
 	var mapOptions = {
 		zoom : 12,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	}
 
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	bounds = new google.maps.LatLngBounds();
+	
 	initialized = true;
 }
 
-function plotLocationByLatLon(lat,lon,iconImg){ 
-	if(!initialized) {
+
+function plotLocationByLatLon(lat, lon, address, iconImg, centered) {
+	if (!initialized) {
 		initialize();
 	}
-	
+
 	//alert(lat + " " + lon + " " + iconImg);
-	if(!iconImg) {
-		var marker = new google.maps.Marker({
-			  position: new google.maps.LatLng(lat, lon),    
-			  map: map    
-		   });
-	} else {
-		var icon = new google.maps.MarkerImage(iconImg);
-		var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(lat, lon), 
-			map : map,
-			icon : icon
+
+	var position = new google.maps.LatLng(lat, lon);
+	var marker = new google.maps.Marker({
+		position : position,
+		map : map,
+	});
+	
+	
+	if(address) {
+		marker.setTitle(address);
+		
+		//add click listener - https://developers.google.com/maps/documentation/javascript/events
+		google.maps.event.addListener(marker, 'click', function() {
+			//http://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
+			var url = window.location.protocol + "//" + window.location.host + "/RealMashup/restClient/getProperties?watchlist=false&query=" + address;
+			window.open(url, "_self");
 		});
+	}
+	
+	if(iconImg) {
+		var icon = new google.maps.MarkerImage(iconImg);
+		marker.setIcon(icon);
+	}
+	
+	if(centered) {
+		map.setCenter(position);
+	} else {
+	
+		//https://developers.google.com/maps/documentation/javascript/reference?csw=1#LatLngBounds
+		bounds.extend(position);
+		map.fitBounds(bounds);
 	}
 }
 
 function plotLocationByAddress(query) {
-	if(!initialized) {
+	if (!initialized) {
 		initialize();
 	}
-	
+
 	// function written to plot the city/address i.e Red marker
 	geocoder.geocode({
 		'address' : query
@@ -66,15 +82,15 @@ function plotLocationByAddress(query) {
 }
 
 function plotProperties(properties, marker) {
-	for (var i = 0; i < properties.length; i++) {	
+	for (var i = 0; i < properties.length; i++) {
 		var lat = properties[i].latitude;
 		var lon = properties[i].longitude;
+		var address = properties[i].address;
 		
-		plotLocationByLatLon(lat,lon, marker); //iconBase + "blue-pushpin.png"
+		plotLocationByLatLon(lat, lon, address, marker, false); 
 	}
-	
+
 }
 
-function plotHospital(lat,lon, marker) {
-	plotLocationByLatLon(lat,lon, marker);
-}
+
+

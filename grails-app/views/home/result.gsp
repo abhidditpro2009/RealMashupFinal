@@ -169,6 +169,18 @@ col-lg-4 col-md-4 col-sm-4{
     margin-right: -15px;
 }
 
+.labels {
+   color: red;
+   background-color: white;
+   font-family: "Lucida Grande", "Arial", sans-serif;
+   font-size: 10px;
+   font-weight: bold;
+   text-align: center;
+   width: 60px;     
+   border: 2px solid black;
+   white-space: nowrap;
+ }
+
 /** pagination **/
 
 .pagination {
@@ -230,7 +242,6 @@ col-lg-4 col-md-4 col-sm-4{
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.css')}">
 
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext">
-
 
 <script type="text/javascript" src="js/html5shiv.js"></script>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
@@ -371,6 +382,7 @@ col-lg-4 col-md-4 col-sm-4{
 	</header>
 	
 <!-- === MAIN Background === -->
+	
 	<div class="container-fluid">
 		<hr>
 		<% 
@@ -476,9 +488,12 @@ col-lg-4 col-md-4 col-sm-4{
 						</div>
 					</div>
 				</div>
+
 			</div>
 		
 		<% } %>
+		
+
 		<%if(watchlist){ %>
 			<div class="pagination pagination-centered">
 				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
@@ -501,16 +516,16 @@ col-lg-4 col-md-4 col-sm-4{
 	</div>
 	
 	
-		<div id="map-canvas" align="right">
-			    <script>
-			        //set icons to use local
-			        var blue_marker = '<g:resource dir="images" file="marker_blue.png" absolute="true" />';
+<div id="map-canvas" align="right">
+	<script>
+		//set icons to use local
+		var blue_marker = '<g:resource dir="images" file="marker_blue.png" absolute="true" />';
 			        
-        			plotLocationByAddress("${flash.query}");
-        			var propertiesStr = ${flash.propertiesStr};
-       				plotProperties(propertiesStr, blue_marker); // this will plot the properties
-   				</script>
-		</div>
+		plotLocationByAddress("${flash.query}");
+		var propertiesStr = ${flash.propertiesStr};
+		plotProperties(propertiesStr, blue_marker); // this will plot the properties
+	</script>
+</div>
 
 	
 </body>

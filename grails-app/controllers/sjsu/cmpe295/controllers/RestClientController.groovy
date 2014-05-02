@@ -182,7 +182,8 @@ class RestClientController
 				it.zest_amt = zestAmount
 			}
 			
-			
+			flash.query = params.query
+			flash.propertiesStr = JsonOutput.toJson(json.properties)
 			flash.properties = properties
 			render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
 			
