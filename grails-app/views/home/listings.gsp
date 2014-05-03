@@ -519,12 +519,17 @@ col-lg-4 col-md-4 col-sm-4{
 </script>
 
 <script>
-function markProperty() {
+function markNeighborhoods() {
+
+	var markers = {}
+	markers['hospitals'] = '<g:resource dir="images" file="firstaid.png" absolute="true" />';
+	markers['schools'] = '<g:resource dir="images" file="school.png" absolute="true" />';
+	markers['groceryStores'] = '<g:resource dir="images" file="grocery-stores.png" absolute="true" />';
 	
-    plotLocationByLatLon(${flash.lat}, ${flash.lon}, '${flash.address}', null, true);
+	plotPropertyWithNeighborhoods(${flash.lat}, ${flash.lon}, '${flash.address}', markers);
 }
 
-window.onload = markProperty
+window.onload = markNeighborhoods
 </script>
 
 <script>

@@ -18,12 +18,12 @@ function initialize() { // DONE
 }
 
 
-function plotLocationByLatLon(lat, lon, address, iconImg, centered) {
+function plotLocationByLatLon(lat, lon, title, iconImg, centered) {
 	if (!initialized) {
 		initialize();
 	}
 
-	//alert(lat + " " + lon + " " + iconImg);
+	// alert(lat + " " + lon + " " + iconImg);
 
 	var position = new google.maps.LatLng(lat, lon);
 	var marker = new google.maps.Marker({
@@ -32,12 +32,13 @@ function plotLocationByLatLon(lat, lon, address, iconImg, centered) {
 	});
 	
 	
-	if(address) {
-		marker.setTitle(address);
+	if(title) {
+		marker.setTitle(title);
 		
-		//add click listener - https://developers.google.com/maps/documentation/javascript/events
+		// add click listener -
+		// https://developers.google.com/maps/documentation/javascript/events
 		google.maps.event.addListener(marker, 'click', function() {
-			//http://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
+			// http://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
 			var url = window.location.protocol + "//" + window.location.host + "/RealMashup/restClient/getProperties?watchlist=false&query=" + address;
 			window.open(url, "_self");
 		});
@@ -52,30 +53,39 @@ function plotLocationByLatLon(lat, lon, address, iconImg, centered) {
 		map.setCenter(position);
 	} else {
 	
-		//https://developers.google.com/maps/documentation/javascript/reference?csw=1#LatLngBounds
+		// https://developers.google.com/maps/documentation/javascript/reference?csw=1#LatLngBounds
 		bounds.extend(position);
 		map.fitBounds(bounds);
 	}
 }
 
-function plotLocationByAddress(query) {
+function plotLocationByAddress(address, title, iconImg, centered) {
 	if (!initialized) {
 		initialize();
 	}
 
 	// function written to plot the city/address i.e Red marker
 	geocoder.geocode({
-		'address' : query
+		'address' : address
 	}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
-			map.setCenter(results[0].geometry.location);
+			if(centered) {
+			    map.setCenter(results[0].geometry.location);
+			}
 			var marker = new google.maps.Marker({
 				map : map,
 				position : results[0].geometry.location
 			});
-
+			
+			if(title) {
+				marker.setTitle(title);
+			}
+			if(iconImg) {
+				var icon = new google.maps.MarkerImage(iconImg);
+				marker.setIcon(icon);
+			}
 		} else {
-			alert('Geocode was not successful for the following reason: '
+			console.log('Geocode was not successful for the following reason: '
 					+ status);
 		}
 	});
@@ -92,5 +102,47 @@ function plotProperties(properties, marker) {
 
 }
 
+function plotNeighborhoods(neighborhoods, markers) {
+	
+	//alert(neighborhoods);
+	var types = ['hospitals', 'schools', 'groceryStores'];
+	types.forEach( function(type) {
+	
+		for (var i = 0; i < neighborhoods[type].length; i++) {
+			var name = neighborhoods[type][i].name;
+			var address = neighborhoods[type][i].address;
+			
+			plotLocationByAddress(address, name, markers[type], false);
+			
+			//for geocoding limit
+			if(i > 4) break;
+		}
+	});
+	
+}
+
+function plotPropertyWithNeighborhoods(lat, lon, title, markers) {
+	//plot home centered
+    plotLocationByLatLon(lat, lon, title, null, true);
+    
+    //make REST call to get neighborhood
+	var xmlhttp;
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	//listner 
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			//http://stackoverflow.com/questions/14249268/having-trouble-with-my-json-http-request
+			plotNeighborhoods(JSON.parse(xmlhttp.responseText), markers);
+		}
+	}
+
+	var url = window.location.protocol + "//" + window.location.host + "/RealMashup/rest/neighborhood?lat=" + lat + "&lon=" + lon;
+	xmlhttp.open("GET", url, true);
+	xmlhttp.send();
+}
 
 
