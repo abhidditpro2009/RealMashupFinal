@@ -155,6 +155,7 @@ col-lg-4 col-md-4 col-sm-4{
 <g:javascript src="jquery.easing.1.3.js"></g:javascript>
 <script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAMu5q5Ug6uZn1CmI8MXL-ne3oAWCtpPzk"></script>-->
 <g:javascript src="mapUtil.js"></g:javascript>
 
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
