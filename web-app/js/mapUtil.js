@@ -39,7 +39,7 @@ function plotLocationByLatLon(lat, lon, title, iconImg, centered) {
 		// https://developers.google.com/maps/documentation/javascript/events
 		google.maps.event.addListener(marker, 'click', function() {
 			// http://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
-			var url = window.location.protocol + "//" + window.location.host + "/RealMashup/restClient/getProperties?watchlist=false&query=" + address;
+			var url = window.location.protocol + "//" + window.location.host + "/RealMashup/restClient/getProperties?watchlist=false&query=" + title;
 			window.open(url, "_self");
 		});
 	}
@@ -115,7 +115,7 @@ function plotNeighborhoods(neighborhoods, markers) {
 			plotLocationByAddress(address, name, markers[type], false);
 			
 			//for geocoding limit
-			if(i > 4) break;
+			if(i > 2) break;
 		}
 	});
 	
