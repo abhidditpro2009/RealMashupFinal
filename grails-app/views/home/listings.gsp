@@ -124,12 +124,13 @@ col-lg-4 col-md-4 col-sm-4{
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
+
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'font-awesome.css')}">
 
 <!-- CSS (necessary for Bootstrap's CSS ) -->
 

@@ -115,6 +115,7 @@ body {
     color: #464646;
     font-family: Proxima Nova Light,Helvetica,Arial;
     font-size: 15px;
+    background: transparent 
 }
 body {
     color: #333333;
@@ -124,10 +125,9 @@ body {
 }
 html {
     font-size: 62.5%;
-}
-html {
     font-family: sans-serif;
 }
+html,body{background-color:#ffffff;}
 
 .col-lg-12 {
     min-height: 1px;
@@ -223,13 +223,14 @@ col-lg-4 col-md-4 col-sm-4{
 </style>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
-<script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
+
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'font-awesome.css')}">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <link rel="stylesheet" href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" type="text/css" media="screen">
@@ -250,8 +251,8 @@ col-lg-4 col-md-4 col-sm-4{
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAMu5q5Ug6uZn1CmI8MXL-ne3oAWCtpPzk"></script>-->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
 <g:javascript src="mapUtil.js"></g:javascript>
 <!-- fancybox init -->
 <script>
@@ -310,8 +311,6 @@ col-lg-4 col-md-4 col-sm-4{
             }
             
 </script>
-
-
 </head>
 <body>
 	<header>
@@ -424,7 +423,7 @@ col-lg-4 col-md-4 col-sm-4{
 										alt="64x64" data-src="holder.js/64x64">
 									<%}%>
 							</a>
-							<div class="col-lg-8 rowText"">
+							<div class="col-lg-8 rowText" style="height: 200px; width: 650px;">
 								<h4 style="padding-top: 10px; border-top-width: 20px; margin-top: 20px;">
 									<g:link controller="restClient" action="getProperties" params="${['query':properties[i].address, 'watchlist':watchlist]}" >
 									${properties[i].address}, ${properties[i].city}, ${properties[i].zipcode}

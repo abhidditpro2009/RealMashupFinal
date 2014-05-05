@@ -43,14 +43,14 @@
 </style>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-<link rel="stylesheet" href="css/font-awesome.css">
+
 <script src="//www.google-analytics.com/ga.js" style=""></script>
-<script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-<!-- body { padding-top: 60px; padding-bottom: 40px; } -->
+
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
+<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'font-awesome.css')}">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <link rel="stylesheet" type="text/css"  href="${resource(dir: 'fancybox', file: 'jquery.fancybox-v=2.1.5.css')}" media="screen">
@@ -185,26 +185,26 @@ $(document).ready(function(e) {
 
 <r:layoutResources/>
 <script>
-            function populate()
-            {	
-				var list = $("#updateMe").html().replace(/'/g, "")
-				
-				var res = list.split(",");
-				
-				var rlist = [] ;
-				res[0] = res[0].substring(1); //removing [
-				var len = res.length 
-				res[len-1] = res[len-1].substring(0, res[len-1].length -1); // removing ]
-				
-				for(var i in res)
-					{	
-						rlist.push(res[i]);
-					}				
-			
-				$( "#searchbar" ).autocomplete({
-          	      source:  rlist
-          	    });
-            }
+function populate()
+{	
+	var list = $("#updateMe").html().replace(/'/g, "")
+	
+	var res = list.split(",");
+	
+	var rlist = [] ;
+	res[0] = res[0].substring(1); //removing [
+	var len = res.length 
+	res[len-1] = res[len-1].substring(0, res[len-1].length -1); // removing ]
+	
+	for(var i in res)
+		{	
+			rlist.push(res[i]);
+		}				
+	
+	$( "#searchbar" ).autocomplete({
+	      	      source:  rlist
+	      	    });
+}
                     
 </script>
 </head>
@@ -313,13 +313,11 @@ $(document).ready(function(e) {
 			 <g:remoteField id="searchbar"  controller ="restClient" action="getPropertiesInfoByAjax" class="center-block form-control input-lg" value="${properties}" 
 				required = "required" update="updateMe" onComplete="populate()" type="text" title="Search" placeholder="e.g. San Jose" name="query" /> 
 			 <div id="updateMe" style="display: none" > ${properties}   </div>
-				<div class="form-group fieldcontain text-center">
-					<span class="input-group-btn">
-						<button class="btn btn-lg btn-primary btn-inverse" type="submit">
-							<i class="icon-search icon-white"></i>
-						</button>
-					</span>
-				</div>
+			 <span class="input-group-btn">
+				<button class="btn btn-lg btn-primary btn-inverse" type="submit">
+					<i class="icon-search icon-white"></i>
+				</button>
+			</span>
 			</g:form>
 		</div>
 	</div>

@@ -1,5 +1,7 @@
 modules = {
     application {
-      //  resource url:'js/application.js'
+      resource url:'js/html5shiv.js'
+	  
+	  
     }
 }
