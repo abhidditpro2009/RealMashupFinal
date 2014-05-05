@@ -66,29 +66,34 @@ class RestClientController
 					
 					
 					// new algorithm with confidence score
+					def baseConf = 0;
 					
 					// Cost of living is High and prices going down => wait
 					if(flash.costOfLiving <= 1.5 && flash.priceAppreciated == false )
 					{
 						flash.ifBuy = "wait";
+						baseConf = 30;
 					}
 					// Cost of living is High and prices going up => Buy if budget is high
 					else if(flash.costOfLiving <= 1.5 && flash.priceAppreciated == true )
 					{
 						flash.ifBuy = "buy";
+						baseConf = 50;
 					}
 					// Cost of living is Low and prices going down => Dont Buy
 					else if(flash.costOfLiving > 1.5 && flash.priceAppreciated == false )
 					{
-						flash.ifBuy = "Dont buy";
+						flash.ifBuy = "wait";
+						baseConf = 50;
 					}
 					// Cost of living is Low and prices going up => Buy (Good investment)
 					else if(flash.costOfLiving > 1.5 && flash.priceAppreciated == true )
 					{
 						flash.ifBuy = "buy";
+						baseConf = 50;
 					}
 					
-					flash.cscore = 50 + ((flash.education+3) * 2) + ((flash.crimeRate+3) *2) + ((flash.employment+3) * 2) + ((flash.amenities+3)*3) + (flash.weather+3)
+					flash.cscore = baseConf + ((flash.education+3) * 2) + ((flash.crimeRate+3) *5) + ((flash.employment+3) * 2) + ((flash.amenities+3))
 					print("Thumbnail: "+flash.thumbnail)
 					
 					//render(view: "/home/listings")

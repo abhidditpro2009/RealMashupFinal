@@ -227,10 +227,6 @@ col-lg-4 col-md-4 col-sm-4{
 <!-- body { padding-top: 60px; padding-bottom: 40px; } -->
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="${request.contextPath}/css/variables.less?v=1">
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'lavish-bootstrap.css')}" />
-<link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'variables.less')}" />
-
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.min.css')}">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'bootstrap-responsive.css')}">
