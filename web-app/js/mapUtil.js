@@ -39,7 +39,6 @@ function plotLocationByLatLon(lat, lon, title, iconImg, centered) {
 		google.maps.event.addListener(marker, 'click', function() {
 			// http://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
 			var url = window.location.protocol + "//" + "realmashup.aws.af.cm" + "/restClient/getProperties?watchlist=false&query=" + title;
-			alert(url);
 			window.open(url, "_self");
 		});
 	}
@@ -112,7 +111,6 @@ function plotNeighborhoods(neighborhoods, markers) {
 		for (var i = 0; i < neighborhoods[type].length; i++) {
 			var name = neighborhoods[type][i].name;
 			var address = neighborhoods[type][i].address;
-			alert(name);
 			plotLocationByAddress(address, name, markers[type], false);
 			
 			//for geocoding limit
