@@ -21,6 +21,20 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 }
 </style>
 <style type="text/css">
+#map-canvas {
+   height: 410px;
+   width: 600px;
+   padding: 50px;
+   overflow: visible;
+   float: right;
+   border-style: ridge;
+   border-width:5px;
+   border-color: white;
+   padding-left: 50px; 
+ }
+/**margin:50px 25px 15px 500px;**/
+#map-canvas img { max-width: none }
+
 @media print {
 	.gm-style .gmnoprint,.gmnoprint {
 		display: none
@@ -155,6 +169,18 @@ col-lg-4 col-md-4 col-sm-4{
     margin-right: -15px;
 }
 
+.labels {
+   color: red;
+   background-color: white;
+   font-family: "Lucida Grande", "Arial", sans-serif;
+   font-size: 10px;
+   font-weight: bold;
+   text-align: center;
+   width: 60px;     
+   border: 2px solid black;
+   white-space: nowrap;
+ }
+
 /** pagination **/
 
 .pagination {
@@ -217,7 +243,6 @@ col-lg-4 col-md-4 col-sm-4{
 
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext">
 
-
 <script type="text/javascript" src="js/html5shiv.js"></script>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
@@ -226,6 +251,8 @@ col-lg-4 col-md-4 col-sm-4{
 <script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAMu5q5Ug6uZn1CmI8MXL-ne3oAWCtpPzk"></script>-->
+<g:javascript src="mapUtil.js"></g:javascript>
 <!-- fancybox init -->
 <script>
 	$(document).ready(function(e) {
@@ -356,6 +383,7 @@ col-lg-4 col-md-4 col-sm-4{
 	</header>
 	
 <!-- === MAIN Background === -->
+	
 	<div class="container-fluid">
 		<hr>
 		<% 
@@ -469,9 +497,12 @@ col-lg-4 col-md-4 col-sm-4{
 						</div>
 					</div>
 				</div>
+
 			</div>
 		
 		<% } %>
+		
+
 		<%if(watchlist){ %>
 			<div class="pagination pagination-centered">
 				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
@@ -492,6 +523,19 @@ col-lg-4 col-md-4 col-sm-4{
 			<p class="text-muted credit align-center" style = "color: #777777; font-size: 16px; font-weight: 300; line-height: 1.6em;">&copy; Real Realty 2014</p>
 		</div>
 	</div>
+	
+	
+<div id="map-canvas" align="right">
+	<script>
+		//set icons to use local
+		var blue_marker = '<g:resource dir="images" file="marker_blue.png" absolute="true" />';
+			        
+		plotLocationByAddress("${flash.query}");
+		var propertiesStr = ${flash.propertiesStr};
+		plotProperties(propertiesStr, blue_marker); // this will plot the properties
+	</script>
+</div>
+
 	
 </body>
 </html>

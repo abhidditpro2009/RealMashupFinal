@@ -154,6 +154,9 @@ col-lg-4 col-md-4 col-sm-4{
 <g:javascript src="bootstrap.min.js"></g:javascript>
 <g:javascript src="jquery.easing.1.3.js"></g:javascript>
 <script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAMu5q5Ug6uZn1CmI8MXL-ne3oAWCtpPzk"></script>-->
+<g:javascript src="mapUtil.js"></g:javascript>
 
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
@@ -515,33 +518,21 @@ col-lg-4 col-md-4 col-sm-4{
 	});
 
 </script>
+
 <script>
-function initialize() {
-  var lat = ${flash.lat}
-  var lon = ${flash.lon}
-  var mapOptions = {
-    zoom: 10,
-    center: new google.maps.LatLng(lat, lon)
-  };
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
+function markNeighborhoods() {
 
-  var marker = new google.maps.Marker({
-	  position: new google.maps.LatLng(lat, lon),    
-	  map: map    
-   });
+	var markers = {}
+	markers['hospitals'] = '<g:resource dir="images" file="firstaid.png" absolute="true" />';
+	markers['schools'] = '<g:resource dir="images" file="school.png" absolute="true" />';
+	markers['groceryStores'] = '<g:resource dir="images" file="grocery-stores.png" absolute="true" />';
+	
+	plotPropertyWithNeighborhoods(${flash.lat}, ${flash.lon}, '${flash.address}', markers);
 }
 
-function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
-      'callback=initialize';
-  document.body.appendChild(script);
-}
-
-window.onload = loadScript;
+window.onload = markNeighborhoods
 </script>
+
 <script>
 $(document).ready(
 		function(ev) {
@@ -557,6 +548,7 @@ $(document).ready(
 					})
 		});
 </script>
+
 <script>
 $(document).ready(function(e) {
 	var lis = $('.nav > li');
