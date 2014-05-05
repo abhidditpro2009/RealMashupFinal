@@ -528,7 +528,7 @@ function markNeighborhoods() {
 	markers['restaurants'] = '<g:resource dir="images" file="restaurant.png" absolute="true" />';
 	markers['groceryStores'] = '<g:resource dir="images" file="grocery-store.png" absolute="true" />';
 	markers['cinemas'] = '<g:resource dir="images" file="cinema.jpg" absolute="true" />';
-	markers['publicTransits'] = '<g:resource dir="images" file="cinema.jpg" absolute="true" />';
+	markers['publicTransits'] = '<g:resource dir="images" file="transport.jpg" absolute="true" />';
 	
 	plotPropertyWithNeighborhoods(${flash.lat}, ${flash.lon}, '${flash.address}', markers);
 }

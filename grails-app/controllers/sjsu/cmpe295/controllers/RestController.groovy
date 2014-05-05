@@ -555,9 +555,10 @@ class RestController {
 			def hospitals = yelpService.search("hospital", lat, lon)
 			def schools = yelpService.search("school", lat, lon)
 			def restaurants = yelpService.search("restaurant", lat, lon)
+			def publicTransits = yelpService.search("public transit", lat, lon)
 			def groceryStores = yelpService.search("grocery store", lat, lon)
 			def cinemas = yelpService.search("cinema", lat, lon)
-			def publicTransits = yelpService.search("public transit", lat, lon)
+			
 			
 			def neighborhoods = [:]
 			neighborhoods['hospitals'] = hospitals
