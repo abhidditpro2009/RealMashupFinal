@@ -154,6 +154,9 @@ col-lg-4 col-md-4 col-sm-4{
 <g:javascript src="bootstrap.min.js"></g:javascript>
 <g:javascript src="jquery.easing.1.3.js"></g:javascript>
 <script type="text/javascript" src="fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAMu5q5Ug6uZn1CmI8MXL-ne3oAWCtpPzk"></script>-->
+<g:javascript src="mapUtil.js"></g:javascript>
 
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'font-awesome.min.css')}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${resource(dir: 'css', file: 'style.css')}">
@@ -364,11 +367,11 @@ col-lg-4 col-md-4 col-sm-4{
 			<li class="active"><a href="#pricePrediction" data-toggle="tab">Price Predictions</a></li>
 			<li><a href="#ifBuy" data-toggle="tab">Buying Advise</a></li>
 			<li><a href="#amenities" data-toggle="tab">Amenities</a></li>
-			<li><a href="#crimerate" data-toggle="tab">Crime Rate</a></li>
+			<li><a href="#crimerate" data-toggle="tab">Safety</a></li>
 			<li><a href="#education" data-toggle="tab">Education</a></li>
 			<li><a href="#employment" data-toggle="tab">Employment</a></li>
 			<li><a href="#weather" data-toggle="tab">Weather</a></li>
-			<li><a href="#costOfLiving" data-toggle="tab">Cost of Living</a></li>
+			<li><a href="#costOfLiving" data-toggle="tab">Affordability</a></li>
 		</ul>
 		<div id="tabscontent" class="tab-content">
 			<div class="tab-pane fade in active" id="pricePrediction">
@@ -421,7 +424,7 @@ col-lg-4 col-md-4 col-sm-4{
 				<div class="thumbnail pull-left">
 					<g:img file="crimerate.jpg" alt=""/>
 					<div class="caption">
-						<h3>Crime Rate</h3>
+						<h3>Safety</h3>
 						<div id="crimeRateStar"></div>
 					</div>
 				</div>
@@ -457,7 +460,7 @@ col-lg-4 col-md-4 col-sm-4{
 				<div class="thumbnail pull-left">
 					<g:img dir="images" file="costofliving.jpg" alt=""/>
 					<div class="caption">
-						<h3>Cost Of Living</h3>
+						<h3>Affordability</h3>
 						<div id="costOfLivingStar"></div>
 					</div>
 				</div>
@@ -515,33 +518,23 @@ col-lg-4 col-md-4 col-sm-4{
 	});
 
 </script>
+
 <script>
-function initialize() {
-  var lat = ${flash.lat}
-  var lon = ${flash.lon}
-  var mapOptions = {
-    zoom: 10,
-    center: new google.maps.LatLng(lat, lon)
-  };
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
+function markNeighborhoods() {
 
-  var marker = new google.maps.Marker({
-	  position: new google.maps.LatLng(lat, lon),    
-	  map: map    
-   });
+	var markers = {}
+	markers['hospitals'] = '<g:resource dir="images" file="firstaid.png" absolute="true" />';
+	markers['schools'] = '<g:resource dir="images" file="school.png" absolute="true" />';
+	markers['restaurants'] = '<g:resource dir="images" file="restaurant.png" absolute="true" />';
+	markers['groceryStores'] = '<g:resource dir="images" file="grocery-store.png" absolute="true" />';
+	markers['cinemas'] = '<g:resource dir="images" file="cinema.jpg" absolute="true" />';
+	
+	plotPropertyWithNeighborhoods(${flash.lat}, ${flash.lon}, '${flash.address}', markers);
 }
 
-function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
-      'callback=initialize';
-  document.body.appendChild(script);
-}
-
-window.onload = loadScript;
+window.onload = markNeighborhoods
 </script>
+
 <script>
 $(document).ready(
 		function(ev) {
@@ -557,6 +550,7 @@ $(document).ready(
 					})
 		});
 </script>
+
 <script>
 $(document).ready(function(e) {
 	var lis = $('.nav > li');

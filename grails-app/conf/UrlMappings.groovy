@@ -14,6 +14,10 @@ class UrlMappings {
 			action = [GET: "getProperties"]
 		}
 		
+		"/rest/neighborhood/$sku?"(controller: "rest", parseRequest: true) {
+			action = [GET: "getNeighborhoods"]
+		}
+		
 		"/rest/ajax/$sku?"(controller: "rest", parseRequest: true) {
 			action = [GET: "getPropertiesInfoByAjax"]
 		}

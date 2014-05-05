@@ -3,6 +3,9 @@ import grails.converters.JSON
 import java.text.DecimalFormat
 import sjsu.cmpe295.models.MasterProperty
 import sjsu.cmpe295.models.User
+import sjsu.cmpe295.services.YelpService
+import org.codehaus.groovy.grails.web.json.JSONArray
+import org.codehaus.groovy.grails.web.json.JSONObject
 
 // This class acts as a backend for all the urls mapped from urlMappings.groovy
 
@@ -540,5 +543,34 @@ class RestController {
 			def message = "failue:Empty Watchlist"
 			render JSON.parse("{\"error\" : \"" + message + "\"}") as JSON
 		}
+	}
+	
+	def yelpService
+	def getNeighborhoods() {
+		try {
+			def lat = params.lat
+			def lon = params.lon
+			
+			println("In RestController/getNeighborhoods()")
+			def hospitals = yelpService.search("hospital", lat, lon)
+			def schools = yelpService.search("school", lat, lon)
+			def restaurants = yelpService.search("restaurant", lat, lon)
+			def groceryStores = yelpService.search("grocery store", lat, lon)
+			def cinemas = yelpService.search("cinema", lat, lon)
+			
+			def neighborhoods = [:]
+			neighborhoods['hospitals'] = hospitals
+			neighborhoods['schools'] = schools
+			neighborhoods['restaurants'] = restaurants
+			neighborhoods['groceryStores'] = groceryStores
+			neighborhoods['cinemas'] = cinemas
+			println(neighborhoods as JSON)
+			
+			render(neighborhoods as JSON)
+		}
+		catch(Exception e) {
+			println(e)
+		}
+
 	}
 }
