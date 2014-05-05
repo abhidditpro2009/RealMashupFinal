@@ -364,11 +364,11 @@ col-lg-4 col-md-4 col-sm-4{
 			<li class="active"><a href="#pricePrediction" data-toggle="tab">Price Predictions</a></li>
 			<li><a href="#ifBuy" data-toggle="tab">Buying Advise</a></li>
 			<li><a href="#amenities" data-toggle="tab">Amenities</a></li>
-			<li><a href="#crimerate" data-toggle="tab">Crime Rate</a></li>
+			<li><a href="#crimerate" data-toggle="tab">Safety</a></li>
 			<li><a href="#education" data-toggle="tab">Education</a></li>
 			<li><a href="#employment" data-toggle="tab">Employment</a></li>
 			<li><a href="#weather" data-toggle="tab">Weather</a></li>
-			<li><a href="#costOfLiving" data-toggle="tab">Cost of Living</a></li>
+			<li><a href="#costOfLiving" data-toggle="tab">Affordability</a></li>
 		</ul>
 		<div id="tabscontent" class="tab-content">
 			<div class="tab-pane fade in active" id="pricePrediction">
@@ -421,7 +421,7 @@ col-lg-4 col-md-4 col-sm-4{
 				<div class="thumbnail pull-left">
 					<g:img file="crimerate.jpg" alt=""/>
 					<div class="caption">
-						<h3>Crime Rate</h3>
+						<h3>Safety</h3>
 						<div id="crimeRateStar"></div>
 					</div>
 				</div>
@@ -457,7 +457,7 @@ col-lg-4 col-md-4 col-sm-4{
 				<div class="thumbnail pull-left">
 					<g:img dir="images" file="costofliving.jpg" alt=""/>
 					<div class="caption">
-						<h3>Cost Of Living</h3>
+						<h3>Affordability</h3>
 						<div id="costOfLivingStar"></div>
 					</div>
 				</div>

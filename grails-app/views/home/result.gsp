@@ -438,6 +438,14 @@ col-lg-4 col-md-4 col-sm-4{
 										NA
 									<%}%>	
 									</dd>
+									<dt>Price Prediction</dt>
+									<dd>
+									<%if(flash.properties[i].priceAppreciated == true){%>
+										Increasing
+									<%}else if(flash.properties[i].priceAppreciated == false){%>
+										Decreasing
+									<%}%>	
+									</dd>
 								</dl>
 								<div class="col-md-2">
 									<p>

@@ -108,9 +108,11 @@ class RestClientController
 							String zestAmount = '$' + (dFormat.format(it.zest_amt));
 							println(zestAmount)
 							it.zest_amt = zestAmount
+							
 						}
 						
 						flash.properties = properties
+						
 						
 						//redirect(controller: "home", action:"showResult",  model:['properties':properties, 'total': total, 'watchlist': false])
 						render(view: "/home/result", model:['properties':properties, 'total': total, 'watchlist': false])
