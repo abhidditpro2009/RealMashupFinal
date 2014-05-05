@@ -39,6 +39,7 @@ grails.project.dependency.resolution = {
 		compile "com.xlson.groovycsv:groovycsv:1.0"
 		build "com.xlson.groovycsv:groovycsv:1.0"
 		runtime "com.xlson.groovycsv:groovycsv:1.0"
+		
     }
 
     plugins {
@@ -60,5 +61,8 @@ grails.project.dependency.resolution = {
 		compile ":rest:0.8"
 		
 		compile ":twitter-bootstrap:3.1.1"
+
+		compile ":oauth:2.1.0"
+		
     }
 }
