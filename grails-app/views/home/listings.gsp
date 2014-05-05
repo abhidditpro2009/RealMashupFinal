@@ -392,7 +392,7 @@ col-lg-4 col-md-4 col-sm-4{
 			<div class="tab-pane fade" id="ifBuy">
 				<div class="thumbnail pull-left">
 					<div class="caption">
-						<h3>Buy/Not Buy</h3>
+						<h3>Buy/Wait</h3>
 					</div>
 					<g:if test="${flash.ifBuy  == "buy"}">
 						<g:img dir="images"  file="thumbs-up.jpg" alt=""/>
@@ -528,6 +528,7 @@ function markNeighborhoods() {
 	markers['restaurants'] = '<g:resource dir="images" file="restaurant.png" absolute="true" />';
 	markers['groceryStores'] = '<g:resource dir="images" file="grocery-store.png" absolute="true" />';
 	markers['cinemas'] = '<g:resource dir="images" file="cinema.jpg" absolute="true" />';
+	markers['publicTransits'] = '<g:resource dir="images" file="transport.jpg" absolute="true" />';
 	
 	plotPropertyWithNeighborhoods(${flash.lat}, ${flash.lon}, '${flash.address}', markers);
 }

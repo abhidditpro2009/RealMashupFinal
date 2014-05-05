@@ -34,13 +34,14 @@ function plotLocationByLatLon(lat, lon, title, iconImg, centered) {
 	
 	if(title) {
 		marker.setTitle(title);
-		
+		alert("in");
 		// add click listener -
 		// https://developers.google.com/maps/documentation/javascript/events
 		google.maps.event.addListener(marker, 'click', function() {
 			alert("click");
 			// http://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
-			var url = window.location.protocol + "//" + window.location.host + "/RealMashup/restClient/getProperties?watchlist=false&query=" + address;
+			var url = window.location.protocol + "//" + window.location.host + "/RealMashup/restClient/getProperties?watchlist=false&query=" + title;
+			alert(url);
 			window.open(url, "_self");
 		});
 	}
@@ -106,7 +107,7 @@ function plotProperties(properties, marker) {
 function plotNeighborhoods(neighborhoods, markers) {
 	
 	//alert(neighborhoods);
-	var types = ['hospitals', 'schools', 'restaurants','groceryStores', 'cinemas'];
+	var types = ['hospitals', 'schools', 'restaurants', 'publicTransits', 'groceryStores', 'cinemas'];
 	//var types = ['schools', 'groceryStores'];
 	types.forEach( function(type) {
 	
