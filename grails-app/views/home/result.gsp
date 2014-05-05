@@ -23,7 +23,7 @@ style type ="text /css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc di
 <style type="text/css">
 #map-canvas {
    height: 410px;
-   width: 600px;
+   width: 100%;
    padding: 50px;
    overflow: visible;
    float: right;
@@ -383,7 +383,16 @@ col-lg-4 col-md-4 col-sm-4{
 	</header>
 	
 <!-- === MAIN Background === -->
-	
+	<div id="map-canvas" class="row" style:width=100%>
+			<script>
+			//set icons to use local
+			var blue_marker = '<g:resource dir="images" file="marker_blue.png" absolute="true" />';
+				        
+			plotLocationByAddress("${flash.query}");
+			var propertiesStr = ${flash.propertiesStr};
+			plotProperties(propertiesStr, blue_marker); // this will plot the properties
+			</script>
+		</div>
 	<div class="container-fluid">
 		<hr>
 		<% 
@@ -395,6 +404,7 @@ col-lg-4 col-md-4 col-sm-4{
 		
 		if(	max > properties.size())
 			max = properties.size()
+	
 		
 		for(int i=offset;i<offset+max;i++){ %>
 		
@@ -524,18 +534,6 @@ col-lg-4 col-md-4 col-sm-4{
 		</div>
 	</div>
 	
-	
-<div id="map-canvas" align="right">
-	<script>
-		//set icons to use local
-		var blue_marker = '<g:resource dir="images" file="marker_blue.png" absolute="true" />';
-			        
-		plotLocationByAddress("${flash.query}");
-		var propertiesStr = ${flash.propertiesStr};
-		plotProperties(propertiesStr, blue_marker); // this will plot the properties
-	</script>
-</div>
-
 	
 </body>
 </html>

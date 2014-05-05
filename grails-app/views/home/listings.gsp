@@ -525,7 +525,9 @@ function markNeighborhoods() {
 	var markers = {}
 	markers['hospitals'] = '<g:resource dir="images" file="firstaid.png" absolute="true" />';
 	markers['schools'] = '<g:resource dir="images" file="school.png" absolute="true" />';
-	markers['groceryStores'] = '<g:resource dir="images" file="grocery-stores.png" absolute="true" />';
+	markers['restaurants'] = '<g:resource dir="images" file="restaurant.png" absolute="true" />';
+	markers['groceryStores'] = '<g:resource dir="images" file="grocery-store.png" absolute="true" />';
+	markers['cinemas'] = '<g:resource dir="images" file="cinema.jpg" absolute="true" />';
 	
 	plotPropertyWithNeighborhoods(${flash.lat}, ${flash.lon}, '${flash.address}', markers);
 }
