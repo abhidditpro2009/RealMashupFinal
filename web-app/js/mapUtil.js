@@ -105,13 +105,14 @@ function plotProperties(properties, marker) {
 function plotNeighborhoods(neighborhoods, markers) {
 	
 	//alert(neighborhoods);
-	var types = ['hospitals', 'schools', 'groceryStores'];
+	var types = ['hospitals', 'schools', 'restaurants','groceryStores', 'cinemas'];
+	//var types = ['schools', 'groceryStores'];
 	types.forEach( function(type) {
 	
 		for (var i = 0; i < neighborhoods[type].length; i++) {
 			var name = neighborhoods[type][i].name;
 			var address = neighborhoods[type][i].address;
-			
+			alert(name);
 			plotLocationByAddress(address, name, markers[type], false);
 			
 			//for geocoding limit
