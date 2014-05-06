@@ -253,7 +253,7 @@ col-lg-4 col-md-4 col-sm-4{
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
-<g:javascript src="mapUtil.js"></g:javascript>
+<!--<g:javascript src="mapUtil.js"></g:javascript> -->
 <!-- fancybox init -->
 <script>
 	$(document).ready(function(e) {
@@ -311,6 +311,7 @@ col-lg-4 col-md-4 col-sm-4{
             }
             
 </script>
+<g:javascript src="mapUtil.js"></g:javascript>
 </head>
 <body>
 	<header>
@@ -382,16 +383,17 @@ col-lg-4 col-md-4 col-sm-4{
 	</header>
 	
 <!-- === MAIN Background === -->
-	<div id="map-canvas" class="row" style:width=100%>
+	<%if(!watchlist){ %>
+	<div id="map-canvas" class="row" >
 			<script>
 			//set icons to use local
-			var blue_marker = '<g:resource dir="images" file="marker_blue.png" absolute="true" />';
-				        
+			var blue_marker = '<g:resource dir="images" file="marker_blue.png" absolute="true" />';      
 			plotLocationByAddress("${flash.query}");
 			var propertiesStr = ${flash.propertiesStr};
 			plotProperties(propertiesStr, blue_marker); // this will plot the properties
 			</script>
 		</div>
+	<%}%>
 	<div class="container-fluid">
 		<hr>
 		<% 
@@ -512,20 +514,19 @@ col-lg-4 col-md-4 col-sm-4{
 		<% } %>
 		
 
-		<%if(watchlist){ %>
-			<div class="pagination pagination-centered">
-				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
-                   action="paginateWatchList" params="${['query':params.query, 'total':total]}"/>
-	    	</div>
-		<%} else {%>
-			<div class="pagination pagination-centered">
-				<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
+		<%if(watchlist && (offset>10)){ %>
+					<div class="pagination pagination-centered">
+						<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient" 
+		                   action="paginateWatchList" params="${['query':params.query, 'total':total]}"/>
+			    	</div>
+		<%} else if(!watchlist){%>
+					<div class="pagination pagination-centered">
+					<g:paginate class="btn btn-lg btn-primary"  total="${ total}" next="Forward" prev="Back" controller="restClient"
 						action="paginateAddresses" params="${['query':params.query, 'total':total]}" />
 					</div>
-				</div>
-			</div>
 		<%} %>	
-	</div>
+				</div>
+
 	<br>
 	<div id="footer" class="section footer " style = "height: 100px; background-color:#000000">
 		<div class="container align-center" style="margin-top: 0px; border-top-width: 50px; padding-top: 50px;">

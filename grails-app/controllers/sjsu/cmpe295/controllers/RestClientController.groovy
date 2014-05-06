@@ -325,6 +325,7 @@ class RestClientController
 			def data = new URL("http://realmashup.aws.af.cm/rest/watchlist/getUserWatchlist?email="+session.email).getText()
 		
 			println(data)
+			println("params "+params.toString())
 			
 			def json = new JsonSlurper().parseText(data)
 			

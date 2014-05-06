@@ -23,7 +23,6 @@ function plotLocationByLatLon(lat, lon, title, iconImg, centered) {
 		initialize();
 	}
 
-	// alert(lat + " " + lon + " " + iconImg);
 
 	var position = new google.maps.LatLng(lat, lon);
 	var marker = new google.maps.Marker({
@@ -103,7 +102,6 @@ function plotProperties(properties, marker) {
 
 function plotNeighborhoods(neighborhoods, markers) {
 	
-	//alert(neighborhoods);
 	var types = ['hospitals', 'schools', 'restaurants', 'publicTransits', 'groceryStores', 'cinemas'];
 	//var types = ['schools', 'groceryStores'];
 	types.forEach( function(type) {
